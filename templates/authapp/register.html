@@ -1,0 +1,65 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <h1>Register Page</h1>
+    <form action="{% url 'register' %}" method="post" autocomplete="off">
+        {% csrf_token %}
+        <label for="username">Username:</label><br>
+        <input type="text" name="username"><br>
+        <label for="username">First Name:</label><br>
+        <input type="text" name="firstname"><br>
+        <label for="username">Last Name:</label><br>
+        <input type="text" name="lastname"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" name="email"><br>
+        <label for="password">Password:</label><br>
+        <input type="password" name="password"><br><br>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html> {% endcomment %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>Register</title>
+</head>
+<body style="background-image: linear-gradient(to left,rgb(76, 235, 168), powderblue);">
+
+
+    <form class="form-signin" action="{% url 'register' %}" method="post" autocomplete="off">
+        {% csrf_token %}
+    
+      <h1 class="h3 mb-3 font-weight-normal" style="text-align: center;">Register Here!</h1>
+      <label for="username" class="sr-only">Username</label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="Username" name="username" required autofocus>
+      <label for="firstname" class="sr-only">First Name</label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="First Name" name="firstname" required autofocus>
+      <label for="username" class="sr-only">Last Name</label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="Last Name" name="lastname" required autofocus>
+      <label for="username" class="sr-only">Email</label>
+      <input type="text" id="inputEmail" class="form-control" placeholder="Email" name="email" required autofocus>
+      <label for="password" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+      
+      <button class="btn btn-lg btn-dark btn-block" type="submit">Register</button>
+      <a class="btn btn-lg btn-primary btn-block" href="{% url 'login' %}">Log In</a>
+      
+    </form>
+</body>
+</html>

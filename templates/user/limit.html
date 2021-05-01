@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body  %}
+
+
+<h1 style="color: black; padding-top: 8%;">LIMIT</h1>
+
+<form action="{% url 'limit' %}" method="POST">
+    {% csrf_token %}
+    <h3 for="dailyLimit" style="margin-left: 39%;">Set your Daily Expense limit:</h3>
+    <label for="dailyLimit" style="margin-left: 35%; font-size: larger;">Your Daily Expense limit should be less than or equal to <b>Rs {{d}}</b></label>
+    <input type="number" name="dailyLimit" id="" style="margin-left: 44%;" value={{dailyLimit}}>
+    <button href="" class="btn btn-lg btn-outline-primary" style="margin-left: 1%;">SET</button>
+</form>
+{% if dailyLimit %}
+<label for="dailyLimit" style="margin-top:3%; margin-left: 18%; font-size: 1.5rem;">If you spend less than or equal to your daily expense limit of <b>Rs {{dailyLimit}}</b> each day, you will save <b>Rs {{sv}}</b> or more at the end of 30 days.</label>
+<label for="dailyLimit" style="margin-left: 18%; font-size: 1.5rem;">If you spend less than or equal to your daily expense limit of <b>Rs {{dailyLimit}}</b> each day, you will save <b>Rs {{wsv}}</b> or more each week.</label>
+{% endif %}
+
+
+{% endblock  %}

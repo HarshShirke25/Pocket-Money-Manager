@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body  %}
+
+
+<h1 style="color: black; padding-top: 3%;">EXPENSES</h1>
+<p style="color: black; padding-top: 10px; text-align: center; font-size: larger;">Pocket Money Left: <b>Rs {{left}}</b></p>
+<p style="color: black; text-align: center; font-size: larger;">Daily Limit Set: <b>Rs {{lim}}</b></p>
+
+<form action="{% url 'expenses' %}" method="POST">
+    {% csrf_token %}
+    <label for="Expense" style="margin-left: 650px;">Category:</label><br>
+    <input type="text" name="category" style="margin-left: 44%;" autocomplete="off">
+    <label for="Expense" style="margin-left: 650px;">Expense On:</label><br>
+    <input type="text" name="expense" style="margin-left: 44%;" autocomplete="off">
+    <label for="Expense" style="margin-left: 650px;">Cost:</label><br>
+    <input type="text" name="cost" style="margin-left: 44%;" autocomplete="off"> <br>
+    <button type="submit" class="btn btn-lg btn-outline-primary" style="border-radius: 50%;margin-left: 44%; margin-top: 1%;">ADD</button>
+</form>
+
+<div style="position: relative; left: 10%; padding:0 30% 0 16%; margin-top: 1%;">
+
+    <!-- {% for expense in expenses %}
+
+    <p>{{expense.expense}}</p>
+    <p>{{expense.cost}}</p>
+
+    {% endfor %} -->
+
+    <table class="table table-striped ">
+        <thead> 
+          <tr class="table-danger">
+            <th scope="col">Date</th>
+            <th scope="col">Expense on</th>
+            <th scope="col">Spent</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for expense in expenses %}
+          <tr class="table-primary">
+            <td>{{time}}</td>
+            <td>{{expense.expense}}</td>
+            <td>{{expense.cost}}</td>
+           </tr>
+           {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+
+
+
+{% endblock  %}
