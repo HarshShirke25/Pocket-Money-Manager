@@ -1,0 +1,52 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- semantic UI -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+    <!--Chart js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <title>{% block title %}{% endblock title %}</title>
+  </head>
+  <body>
+
+  {% block scripts %}
+  {% endblock scripts %}
+
+   <header style="padding-bottom: 54px;">
+        
+         <div class="left_area">
+             <h2 style="color: black;">POCKET MONEY MANAGER. <a href="{% url 'logout' %}" class="btn btn-md btn-dark" style="margin-left:68%;">Log out</a></h2>
+             
+         </div>
+         
+       <div class="sidebar">
+           
+           <a href="{% url 'index' %}" style="color: black;"><i class='bx bxs-dashboard'></i>Home</a>
+           <a href="{% url 'expenses' %}" style="color: black;"><i class='bx bxs-info-circle'></i><span>Expenses</span></a>
+           <a href="{% url 'limit' %}" style="color: black;"><i class='bx bxs-home-smile'></i><span>Limit</span></a>
+           <a href="{% url 'goals' %}"  style="color: black;"><i class='bx bxs-info-circle'></i><span>Goals</span></a>
+           <a href="{% url 'chart' %}"  style="color: black;"><i class='bx bxs-info-circle'></i><span>Charts</span></a>
+           
+          
+       </div>
+  
+  {% block content %}
+ 
+  {% endblock content %}
+
+  
+
+   
+  </body>
+</html>

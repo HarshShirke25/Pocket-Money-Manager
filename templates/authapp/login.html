@@ -15,16 +15,7 @@
     <title>Login</title>
 </head>
 <body style="background-image: linear-gradient(to left,rgb(76, 235, 168), powderblue);">
-    {% comment %} <h1>Login to your account.</h1>
-    
-    <form action="{% url 'login' %}" method="post" autocomplete="off">
-       {% csrf_token %}
-        <label for="username">Username:</label><br>
-        <input type="text" name="username"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" name="password"><br><br>
-        <button type="submit">Login</button>
-    </form> {% endcomment %}
+ 
     
     <form class="form-signin" action="{% url 'login' %}" method="post" autocomplete="off">
         {% csrf_token %}

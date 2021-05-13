@@ -3,6 +3,10 @@ import datetime
 from django.contrib.auth.decorators import login_required
 from . models import MonthlyTotal,Expenses,List,WishList
 from django.contrib.auth.models import User
+from django.views.generic import TemplateView
+    
+import csv
+from django.utils.encoding import smart_str
 
 
 # Create your views here.
@@ -156,4 +160,56 @@ def goals(request):
         w.save()
         return redirect("goals")
     return render(request,"user/goals.html")  
+
+
+class ChartView(TemplateView):
+    template_name = 'chart/chart.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user2 = User.objects.get(username=self.request.user.username)
+        context["qs"] = Expenses.objects.filter(user=user2) 
+        return context
+    
+    
+class PieView(TemplateView):
+    template_name = 'chart/pie.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user2 = User.objects.get(username=self.request.user.username)
+        context["qs"] = Expenses.objects.filter(user=user2) 
+        return context
+    
+    
+class DoView(TemplateView):
+    template_name = 'chart/doughnut.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user2 = User.objects.get(username=self.request.user.username)
+        context["qs"] = Expenses.objects.filter(user=user2) 
+        return context
+    
+
+def download_csv_data(request):
+    response = HttpResponse(content_type = 'text/csv')
+    response['Content-Disposition'] = 'attachment; filename="User.csv"'
+    
+    writer = csv.writer(response,csv.excel)
+    response.write(u'\ufeff'.encode('utf8'))
+    
+    writer.writerow([
+        smart_str(u"Expenses"),
+        smart_str(u"Cost"),
+        smart_str(u"Date and Time"),
+        ])
+    user1 = User.objects.get(username=request.user.username)
+    exps = Expenses.objects.filter(user=user1)
+    for exp in exps:
+        writer.writerow([
+            smart_str(exp.expense),
+            smart_str(exp.cost),
+            smart_str(exp.created_at)
+            ])
+    return response
+
+
 

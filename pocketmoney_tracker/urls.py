@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from . import views
+from user.views import ChartView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/',include('user.urls')),
     path('auth/',include('authapp.urls')),
-    path('',views.login1,name="login1")
+    path('',views.login1,name="login1"),
+    path('chart/',ChartView.as_view(),name="chart")
+    
 ]
