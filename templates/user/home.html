@@ -4,29 +4,21 @@
 
 {% block body  %}
 
-{% for message in messages  %}
-        <p style="text-align: center; padding-top: 5%;">{{message}}</p>
-{% endfor %}
 
 
 <div class="container">
 
     <div class="row">
         <div class="col-lg-12" style="padding-left: 15%;">
-            <h1 style="margin-top: 5%; font-family:fantasy;">Today: {{date}}</h1>
-            <h2 style="padding-top: 6%; font-family:Verdana, Geneva, Tahoma, sans-serif; text-align: center;">ENTER YOUR MONTHLY POCKET MONEY</h2>
+            <h1 style="margin-top: 5%; font-family:fantasy;  margin-bottom: 5%;">📅Today: {{date}}</h1>
+            <h2 style="padding-top: 6%; font-family:Verdana, Geneva, Tahoma, sans-serif; text-align: center;">ENTER YOUR MONTHLY POCKET MONEY💵:</h2>
             <form action="{% url 'index' %}" method="POST">
                 {% csrf_token %}
-                <input style="margin-left: 300px; width: 308px;" type="number" name="mincome" value="{{mincome}}"><br>
+                <input style="margin-left: 320px; width: 308px; border: 5px solid rgb(47, 255, 227);" type="number" name="mincome" value="{{mincome}}"><br>
                 <h2 style="padding-top: 6%; font-family:Verdana, Geneva, Tahoma, sans-serif; text-align: center;">Pocket Money Left:</h2>
-                <input style="margin-left: 300px; width: 308px;" type="number" name="left" value="{{left}}"><br>
+                <input style="margin-left: 320px; width: 308px; border: 5px solid rgb(47, 255, 227);" type="number" name="left" value="{{left}}"><br>
                 <button type="submit" style="margin-left: 420px; margin-top: 2%; font-family:Verdana, Geneva, Tahoma, sans-serif;;"  class="btn btn-lg btn-primary" >SAVE</button>
             </form>
-
-            <a href="{% url 'downloadcsv' %}" class="btn btn-lf btn-primary">Download CSV</a>
-
-            
-           
 
         </div>
 

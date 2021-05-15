@@ -6,7 +6,7 @@ body {
 
 header {
   position: fixed;
-  background-color: rgb(14, 250, 171);
+  background-color: rgb(102, 230, 187);
   padding: 20px;
   width: 100%;
   height: 30px;
@@ -37,7 +37,7 @@ header {
 }
 
 .sidebar {
-  background-image: linear-gradient(rgb(39, 238, 155), powderblue);
+  background-image: linear-gradient(rgb(109, 236, 194), powderblue);
   margin-top: 15px;
   padding-top: 30px;
   position: fixed;

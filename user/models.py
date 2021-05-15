@@ -33,13 +33,14 @@ class WishList(models.Model):
     exp = models.BigIntegerField(default=0)
     
     def __str__(self):
-        return self.user.username
+        return self.wish
     
     
     
     
     
      
+    
     
     
     

@@ -4,55 +4,53 @@
 {% block body  %}
 
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6" style="margin-left: 30%;">
 
-<div style="text-align: center; ">
 
-    <form action="{% url 'goals' %}" method="post">
-    {% csrf_token %}
-
-        <h1 style="position: absolute; left: 680px; margin-top: 2%;">Have a Wishlist?</h1>
-        <h1 style="position: absolute; left: 720px; margin-top: 5%;">Add here!</h1>
-        
-        <label for="wishlist" style="position: relative; left: 3%; padding-top: 10%; font-size: larger;">Wish:</label><br>
-        <input type="text" style="position: relative; left: 3%;" name="wish" id="" autocomplete="off"><br>
-        <label for="wishlist" style="position: relative; left: 3%; padding-top: 2%; font-size: larger;">Cost:</label><br>
-        <input type="text" style="position: relative; left: 3%;" name="exp" id="" autocomplete="off"><br>
-        <button class="btn btn-lg btn-primary" style="position: relative; left: 3%; margin-top: 1%;">ADD</button>
+        <form action="{% url 'goals' %}" method="post">
+        {% csrf_token %}
     
-    </form>
+            <h1 style=" margin-top: 7%;">🛒Have a Wish to Buy something?✨</h1>
+            <h3 style=" margin-top: 5%; text-align: center;">Calculate here the Number of Days⌛ in which you will be able to buy it with your Daily Savings!✅</h3>
+            
+            <label for="wishlist" style="position: relative; left: 30%; padding-top: 2%; font-size: larger;"><b>Wish:</b></label><br>
+            <input type="text" style="position: relative; left: 30%; border: 5px solid rgb(47, 255, 227); width: 300px;" name="wish" id="" autocomplete="off"><br>
+            <label for="wishlist" style="position: relative; left: 30%; padding-top: 2%; font-size: larger;"><b>Cost:</b></label><br>
+            <input type="text" style="position: relative; left: 30%; border: 5px solid rgb(47, 255, 227); width: 300px;" name="exp" id="" autocomplete="off"><br>
+            <button class="btn btn-lg btn-primary" style="position: relative; left: 40%; margin-top: 3%;">CALCULATE</button>
+        
+        </form>
+
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" style="margin-left: 14%; padding-right: 14%;">
+
+{% if wishes %}
+<h1 style=" margin-top: 3%;" id="ws">✔You will be able to Buy {{ws}} within {{a}} days with your per day savings of Rs {{pdsv}}.</h1>
+{% endif %}
+
 
 </div>
 
-<div style="position: relative; left: 10%; padding:0 30% 0 16%; margin-top: 1%;">
+<script type="text/javascript">
+  // close the div in 5 secs
+  window.setTimeout("closeHelpDiv();", 10000);
+  
+  function closeHelpDiv(){
+  document.getElementById("ws").style.display=" none";
+  }
+</script>
 
-    <!-- {% for expense in expenses %}
 
-    <p>{{expense.expense}}</p>
-    <p>{{expense.cost}}</p>
 
-    {% endfor %} -->
 
-    <table class="table table-striped ">
-        <thead> 
-          <tr class="table-danger">
-            <th scope="col">Date</th>
-            <th scope="col">Wish</th>
-            <th scope="col">Cost</th>
-            <th scope="col">Saving at the End of month with set daily limit</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for wish in wishes %}
-          <tr class="table-primary">
-            <td>{{time}}</td>
-            <td>{{wish.wish}}</td>
-            <td>{{wish.exp}}</td>
-            <td style="text-align: center;">{{sv}}</td>
-           </tr>
-           {% endfor %}
-        </tbody>
-      </table>
-</div>
+
+
+
 
 
 

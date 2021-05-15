@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from . models import MonthlyTotal,Expenses,List,WishList
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView
+from django.db.models import Sum
     
 import csv
 from django.utils.encoding import smart_str
@@ -108,6 +109,9 @@ def limit(request):
             dailyLimit = user_info.daily_limit
             left = user_info.left
             d = int(left/30)
+            pdsv = d - dailyLimit
+           
+            
             dm = int(dailyLimit*30)
             sv = left - dm
             w = int(dailyLimit*7)
@@ -136,24 +140,48 @@ def limit(request):
 @login_required
 def goals(request):
     if request.method == "GET":
+        i = 0
+        a = 0
+        ws = ''
         user1 = User.objects.get(username=request.user.username)
         if WishList.objects.filter(user = user1):
             wish_info = WishList.objects.filter(user = user1)
             user_info = MonthlyTotal.objects.get(user=user1)
             dl = user_info.daily_limit
             mi = user_info.left
+            d = int(mi/30)
+            pdsv = int(d - dl)
+            for wish in wish_info:
+                for i in range(100):
+                    if pdsv*i >= wish.exp:
+                        a = i
+                        ws = wish.wish
+                        break
+            
             me = dl*30
             sv = int(mi) - int(me)
             time = datetime.datetime.now()
             return render(request,"user/goals.html",{
             'wishes':wish_info,
             'time':time,
-            'sv':sv
+            'sv':sv,
+            'pdsv':pdsv,
+            'a':a,
+            'ws':ws
           })
         
     
     if request.method == "POST":
+    
         user1 = User.objects.get(username = request.user.username)
+        if WishList.objects.filter(user = user1):  
+            wish_info = WishList.objects.filter(user = user1)
+            user_info = MonthlyTotal.objects.get(user=user1)
+            dl = user_info.daily_limit
+            mi = user_info.left
+            d = int(mi/30)
+            pdsv = int(d - dl)
+                    
         wish = request.POST.get("wish")
         exp = request.POST.get("exp")
         w = WishList(user=user1,wish=wish,exp=exp)
@@ -195,20 +223,25 @@ def download_csv_data(request):
     
     writer = csv.writer(response,csv.excel)
     response.write(u'\ufeff'.encode('utf8'))
-    
+  
     writer.writerow([
+        smart_str(u"Date and Time"),
         smart_str(u"Expenses"),
         smart_str(u"Cost"),
-        smart_str(u"Date and Time"),
+        
         ])
     user1 = User.objects.get(username=request.user.username)
     exps = Expenses.objects.filter(user=user1)
     for exp in exps:
+       
         writer.writerow([
+            smart_str(exp.created_at),
             smart_str(exp.expense),
             smart_str(exp.cost),
-            smart_str(exp.created_at)
+            
             ])
+    writer.writerow(['','','',''])
+    writer.writerow(['TOTAL','',str(exps.aggregate(Sum('cost'))['cost__sum'])])
     return response
 
 
